@@ -3,7 +3,7 @@ name: Deploy Website to IPFS via Pinata
 on:
   push:
     branches:
-      - master  # or main, depending on your default branch
+      - main
 
 jobs:
   deploy:
