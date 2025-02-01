@@ -1,0 +1,28 @@
+name: Deploy Website to IPFS via Pinata
+
+on:
+  push:
+    branches:
+      - master  # or main, depending on your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        npm install -g ipfs-deploy
+
+    - name: Deploy to IPFS
+      uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
+      with:
+        pin-name: 'My personal site'
+        path: './'  # assuming your build files are in the root
+        pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+        pinata-secret-api-key: ${{ secrets.PINATA_SECRET_API_KEY }}
+        verbose: true
+        remove-old: false
